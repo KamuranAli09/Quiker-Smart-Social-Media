@@ -1,0 +1,108 @@
+body {
+	background: radial-gradient(circle, skyblue 5%, white 95%);
+	background: cover;
+}
+
+.banner img {
+	width: 220px;
+	height: 400px;
+	background-size: cover;
+	color: white;
+	border-radius: 5%;
+	margin-top: 2%;
+	margin-bottom: 10%;
+	margin-left: 20%;
+	padding: 0px, 0px, 0px, 0px;
+}
+
+/* Media Query for Tablets */
+@media ( max-width : 768px) {
+	.banner {
+		width: 80%;
+		height: 800px;
+		margin-left: 10%;
+		margin-right: 10%;
+	}
+}
+
+/* Media Query for Mobiles */
+@media ( max-width : 480px) {
+	.banner {
+		width: 85%;
+		height: 600px;
+		margin-left: 5%;
+		margin-right: 5%;
+	}
+}
+
+.login-section {
+	display: inline-block;
+	flex-direction: column;
+	align-items: center;
+	background: none;
+	padding: 50px 0;
+	margin-left: 25%;
+}
+
+.form-container {
+	width: 90%;
+	max-width: 500px;
+	background: none;
+	border-radius: 5%;
+	padding: 30px;
+	margin-bottom: 30px;
+	margin-top: 2.5%;
+}
+
+.form-container h2 {
+	font-size: 24px;
+	font-weight: 600;
+	margin-bottom: 20px;
+}
+
+
+.form-container input[type="text"], .form-container input[type="password"]
+	{
+	width: 80%;
+	height: 30px;
+	padding: 10px;
+	margin-bottom: 20px;
+}
+
+.form-container button {
+	border-radius:35px;
+	height:30px;
+	justify-content: centre;
+	padding-top:1px;
+	padding-bottom:5px;
+	margin-bottom:30px;
+}
+
+@media screen and (min-width: 768px) {
+	.login-section {
+		flex-direction: row;
+		justify-content: flex-end;
+		align-items: flex-start;
+		margin-bottom: 10%;
+		padding-bottom:10%;
+	}
+	.form-container {
+		margin-right: 30px;
+		
+	}
+}
+@media screen and (min-width: 480px) {
+	.login-section {
+		flex-direction: row;
+		justify-content: flex-end;
+		align-items: flex-start;
+		margin-bottom: 10%;
+		padding-bottom:10%;
+	}
+	.form-container {
+		margin-right: 30px;
+	}
+}
+.links{
+	cursor:pointer;
+}

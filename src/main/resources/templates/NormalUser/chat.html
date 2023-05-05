@@ -1,0 +1,149 @@
+<!doctype html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org/"
+	th:replace="NormalUser/base::layout(~{::section})">
+<head>
+<meta charset="UTF-8" />
+<title>Document</title>
+
+</head>
+<style>
+.h1 {
+	color: red
+}
+
+.name-form1 {
+	height: 100vh;
+}
+
+.chat-room {
+	height: 100vh;
+	background: radial-gradient(circle, skyblue 5%, white 95%);
+}
+</style>
+<body>
+	<section id="name-form">
+		<div>
+
+			<div id="name-form1" class="align-items-center"
+				style="height: 100vh;">
+				<div class="alert alert-warning alert-dismissible fade show "
+					role="alert"
+					style="text-align: center; border-radius: 12px; margin-top: 2px;">
+					<strong>Hocus pocus!</strong> Oh snap! Your name is set to the
+					default value.Hit enter to join the chat room!
+
+
+				</div>
+
+				<div class="container-fluid" style="margin-top: 15%;">
+
+					<div class="row">
+						<div class="col-md-4 offset-md-4">
+
+							<div class="input-group">
+
+								<input type="text" readonly th:value="${user.name}"
+									id="name-value" autofocus class="form-control">
+								<div class="input-group-append">
+
+									<button class="btn btn-dark" data-toggle="modal"
+										data-target="#chatroom" id="enter">Enter</button>
+
+								</div>
+
+							</div>
+
+						</div>
+
+					</div>
+
+				</div>
+			</div>
+		</div>
+		<div id="chatroom" class="modal fade" tabindex="-1" role="dialog"
+			aria-labelledby="exampleModalLabel" aria-hidden="true">
+			<div class="modal-dialog" role="document">
+				<div class="modal-content">
+					<div class="modal-header" style="border-radius: 12px;">
+						<h5 class="modal-title" id="exampleModalLabel">Chat Room</h5>
+
+						<button type="button" class="close" data-dismiss="modal"
+							aria-label="Close">
+							<span aria-hidden="true">&times;</span>
+						</button>
+					</div>
+					<div style="margin-left: 20px;">
+						<p>
+							Welcome <strong><span th:text="${user.username}"></span></strong>!
+							Please make sure to be decent !
+						</p>
+					</div>
+					<div id="show-connected">
+					
+					</div>
+					<div class="modal-body">
+						<div id="message-container-table" class="card-body "
+							style="padding-top: 5%; background: radial-gradient(farthest-corner at 40px 40px, #111 20%, #333 100%, #ddd 100%); color: white; border-radius: 12px;">
+							<div class="input-group">
+
+								<input type="text" placeholder="Write a messages "
+									id="message-value" autofocus class="form-control">
+								<div class="input-group-append">
+
+									<button class="btn btn-dark" id="send">Send</button>
+								</div>
+
+							</div>
+							<div class="table-responsive">
+								<table id="message-container-table">
+
+								</table>
+							</div>
+						</div>
+
+					</div>
+				</div>
+			</div>
+		</div>
+		<script type="text/javascript">
+			var stompClient = null
+			function connect(){
+				let socket = new SockJS("/server1")
+				stompClient = Stomp.over(socket)
+				stompClient.connect({},function(frame){
+					console.log("Connected : "+frame)
+					//subscribe
+					stompClient.subscribe("/topic/return-to" , function(response){
+						
+						showMessage(JSON.parse(response.body))
+						
+					});
+					
+				});
+			}
+			function showMessage(message){
+				$("#message-container-table").prepend(`<tr><td><b>${message.name} : </b> ${message.content}</td></tr>`);
+			}
+			function sendMessage(message){
+				let jsonOb={
+						name:localStorage.getItem("name"),
+						content:$("#message-value").val()
+				}
+				stompClient.send("/app/message",{},JSON.stringify(jsonOb));
+				
+			}
+			$(document).ready(e=>{
+				$("#enter").click(()=>{
+					let name = $("#name-value").val()
+					localStorage.setItem("name",name)
+					connect()
+				
+				})
+				$("#send").click(()=>{
+					sendMessage()
+				})
+			})
+		</script>
+	</section>
+</body>
+</html>

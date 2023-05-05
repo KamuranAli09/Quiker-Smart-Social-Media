@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html xmlns:th="https://www.thymeleaf.org/"
+	th:replace="base::layout(~{::section})">
+<head>
+<meta charset="ISO-8859-1">
+<title></title>
+</head>
+<body>
+	<section>
+		<div class="banner">
+			<img id="mockup-image" src="../Images/bg1_home.png"
+				alt="Phone Mockup">
+			<div class="login-section">
+				<div class="form-container">
+					<h2>Log in to your account</h2>
+					<div th:if="${param.error}" class="alert alert-danger">
+						Check your username or 
+						password and try again 
+						</div>
+						<div th:if="${param.logout}" class="alert alert-danger">
+						See You Again
+						</div>
+					<form action="#" th:action="@{/dologin}" method="post">
+						<div class="form-outline">
+							<label class="form-label" for="typeText">Username: </label> <input
+								type="text" id="typeText" name="username" class="form-control" />
+						</div>
+						<div class="form-outline">
+							<label class="form-label" for="typeText">Password:</label> <input
+								type="Password" name="password" id="typeText" class="form-control" />
+						</div>
+						<button type="Submit" class="btn btn-dark btn-rounded">Login</button>
+					</form>
+					<div class="text-left mt-3">
+						<a href="#">Forgot Password?</a>
+					</div>
+					<div class="text-left mt-3">
+						New to Quiker ? <a href="signup"> Sign Up</a>
+					</div>
+
+				</div>
+			</div>
+			<div class="footer">
+				<footer class="bg-light text-center text-lg-end">
+					<!-- Grid container -->
+					<div class="container p-4">
+						<!--Grid row-->
+						<div class="row">
+							<!--Grid column-->
+							<div class="col-lg-6 col-md-12 mb-4 mb-md-0">
+								<h5 class="text-uppercase">About Quiker</h5>
+
+								<p>Quiker is a social media project built using the Spring
+									Bootframework,Spring Security, and Thymeleaf templating engine.
+									It is a platform designed to connect people through short
+									messages, much like Twitter. Users can create a profile, follow
+									other users, post messages, and interact with other users'
+									posts. Overall, Quiker is a feature-rich social media platform
+									that offers a streamlined experience for users. With the use of
+									Spring Boot, Spring Security, and Thymeleaf, the platform is
+									built to be secure, scalable, and maintainable, making it a
+									great choice for businesses or developers looking to build
+									their own social media platform.</p>
+							</div>
+							<!--Grid column-->
+
+							<!--Grid column-->
+							<div class="col-lg-6 col-md-12 mb-4 mb-md-0">
+								<h5 class="text-uppercase">More About Quiker</h5>
+
+								<p>The project leverages the Spring Boot framework to
+									simplify the development process and ensure that the
+									application is scalable and easily maintainable. Spring
+									Security is used to provide authentication and authorization
+									features, ensuring that only authorized users can access
+									certain pages or perform certain actions. Thymeleaf is used for
+									server-side rendering, which allows for dynamic content
+									generation and rendering. This makes it easier to create and
+									manage dynamic content such as user profiles, messages, and
+									comments.</p>
+							</div>
+							<!--Grid column-->
+						</div>
+						<!--Grid row-->
+					</div>
+					<!-- Grid container -->
+					<!-- Copyright -->
+					<div class="text-center p-3"
+						style="background-color: rgba(0, 0, 0, 0.2);">
+						© 2023 Copyright: Kamran Ali - <a class="text-dark" href="/">Quiker.com</a>
+					</div>
+					<!-- Copyright -->
+				</footer>
+			</div>
+		</div>
+	</section>
+
+</body>
+</html>
